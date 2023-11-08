@@ -5,7 +5,12 @@ terraform {
             version = "~> 4.16"
 
         }
+azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 2.0, < 3.0"
     }
+
+}
     required_version = ">= 1.2.0"
 }
 
@@ -33,4 +38,11 @@ resource "aws_instance" "Iac_instance" {
 tags = {
     Name = " Iac Instance "
  }
+
+output {
+
+
 }
+}
+
+
