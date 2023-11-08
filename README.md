@@ -20,12 +20,15 @@ Provisioning a simple EC2 instance.       *Success*
 
 - assign an existing Security  group to the newly created EC2 instance.  *Failure* !
  `LOG :`
-			  `creating EC2 Instance: InvalidParameterValue: Value () for parameter groupId is invalid. The value cannot be empty  
+			  ```creating EC2 Instance: InvalidParameterValue: Value () for parameter groupId is invalid. The value cannot be empty  ```
 
  > **Resolution** : 
 	 - Using data block which is used to retireve existing security group ID and VPC ID 
 	 - also don't forget to specify subnet_id to reseolve *empty* GroupId 
 
 ###  *Resulting Success*
+
+## Using Mutli providers on the main Configue File
+
 
 
