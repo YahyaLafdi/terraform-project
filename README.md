@@ -1,5 +1,6 @@
 
 # Infrastructure as Code Project
+# V1
 ### Terraform 
 #### Installation Process 
 ###### Use a an EC2 instance to access a Linux Environment  for installing #Terraform.
@@ -29,6 +30,12 @@ Provisioning a simple EC2 instance.       *Success*
 ###  *Resulting Success*
 
 ## Using Mutli providers on the main Configue File
+# V2
+#### Modules
+ ### EC2 Module
+- i have used modules in the V2.
+- i have used variables also to decouple my Configuration file .
+- also i created separated output files.
 
 
 
