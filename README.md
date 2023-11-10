@@ -36,6 +36,16 @@ Provisioning a simple EC2 instance.       *Success*
 - i have used modules in the V2.
 - i have used variables also to decouple my Configuration file .
 - also i created separated output files.
+#### State File
+ ### State file storing
+  - i have moved the statefile to an object storing in our case s3
+  - also i have added ressource for creating the s3
+  - and added the backend  ` .tf ` file to enabale remote storing and use of the ` .tfstate` file remotly and not locally
+  - also i created a DynamoDB resource to use for locking the state file to prevent concurrent modification of the infrastructre.
+
+ > * State file *
+>    you should avoid stroing the state file in the VCS as it may discolse information regarding the Inrastructure (access keys , private keys , passwords ....)
+>    instead use Remote object storage with proper permissions 
 
 
 
