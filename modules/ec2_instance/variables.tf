@@ -4,8 +4,17 @@ variable "instance_name"{
 	description = "Specifying Instance Name"
 	type = string
 	default = "Terraform-Instance"
+}
 
-
+variable "perfix" {
+	description = "Specifying prefix for your ressources"
+	type = string
+	default = "my-ci-cd"
+}
+variable "zone" {
+	description = "Specifying availibilty zone"
+	type = string
+	default = "eu-west-3"
 }
 
 variable "sg-id"{
