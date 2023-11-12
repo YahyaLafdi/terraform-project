@@ -6,7 +6,7 @@ variable "instance_name"{
 	default = "Terraform-Instance"
 }
 
-variable "perfix" {
+variable "prefix" {
 	description = "Specifying prefix for your ressources"
 	type = string
 	default = "my-ci-cd"
