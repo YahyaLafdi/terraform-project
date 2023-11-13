@@ -6,16 +6,6 @@ variable "instance_name"{
 	default = "Terraform-Instance"
 }
 
-variable "perfix" {
-	description = "Specifying prefix for your ressources"
-	type = string
-	default = "my-ci-cd"
-}
-variable "zone" {
-	description = "Specifying availibilty zone"
-	type = string
-	default = "eu-west-3"
-}
 
 variable "sg-id"{
 	description = "use sepecific security group"
@@ -36,7 +26,4 @@ variable "instance_ami_type"{
         default = ["ami-00983e8a26e4c9bd9","t2.micro"]
 
 }
-variable "ssh_key"{
-	type = string
-	default = "AccNew"
-}
+

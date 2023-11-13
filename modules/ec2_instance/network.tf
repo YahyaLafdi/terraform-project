@@ -28,6 +28,7 @@ resource "aws_subnet" "main_subnet" {
   tags = {
     Name = "${var.prefix}-igw"
   }
+  }
   resource "aws_route_table" "RT" {
   vpc_id = aws_vpc.main.id
   ### allow internet acesss 
@@ -49,4 +50,4 @@ resource "aws_route_table_association" "public" {
 }
 
 
-}
+
