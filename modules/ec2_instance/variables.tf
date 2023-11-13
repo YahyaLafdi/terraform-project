@@ -7,6 +7,8 @@ variable "instance_name"{
 }
 
 
+
+
 variable "sg-id"{
 	description = "use sepecific security group"
 	type = string
