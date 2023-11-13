@@ -29,6 +29,10 @@ module "ec2_instance" {
 
 source = "./modules/ec2_instance"
 }
+module "terraform_configuration" {
+
+source = "./modules/terraform_configuration"
+}
 
 
 
