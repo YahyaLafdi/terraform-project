@@ -37,4 +37,7 @@ variable "instance_ami_type"{
         default = ["ami-00983e8a26e4c9bd9","t2.micro"]
 
 }
-
+variable "ssh_key"{
+	type = string
+	default = "AccNew"
+}
