@@ -3,7 +3,7 @@ variable "duck_dns" {
   
 }
 
-variable "perfix" {
+variable "prefix" {
 	description = "Specifying prefix for your ressources"
 	type = string
 	default = "my-ci-cd"
