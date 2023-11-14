@@ -23,6 +23,6 @@ tags = {
     Name = "${var.prefix}-Jenkins"
  }
     provisioner "local-exec" {
-      command = "echo url='https://www.duckdns.org/update?domains=server-jenkins&token=${var.duckdns_token}&ip=${aws_instance.jenkins_instance.public_ip}' | curl -K -"
+      command = "echo url='https://www.duckdns.org/update?domains=server-jenkins&token=${var.duck_dns}&ip=${aws_instance.jenkins_instance.public_ip}' | curl -K -"
     }
 }
