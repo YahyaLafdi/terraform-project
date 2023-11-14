@@ -12,7 +12,6 @@ data "aws_ami" "amazon_ubuntu" {
 
 resource "aws_instance" "iac_instance"{
 
-
 		ami = data.aws_ami.amazon_ubuntu.id
   instance_type = var.instance_type
   key_name = var.ssh_key
