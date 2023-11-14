@@ -31,13 +31,13 @@ variable "subnet-id"{
 
 }
 
-variable "instance_ami_type"{
+variable "instance_type"{
         description = "ami and type"
-        type = list(string)
-        default = ["ami-00983e8a26e4c9bd9","t2.micro"]
+        type = string
+        default = "t2.micro"
 
 }
 variable "ssh_key"{
 	type = string
-	default = "AccNew"
+	default = "AccNew"  # already created an ssh key on AWS
 }
