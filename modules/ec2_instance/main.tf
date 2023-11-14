@@ -13,7 +13,7 @@ data "aws_ami" "amazon_ubuntu" {
 resource "aws_instance" "jenkins_instance"{
 
 		ami = data.aws_ami.amazon_ubuntu.id
-  instance_type = "Jenkins_Instance"
+  instance_type = "t2.micro"
   key_name = var.ssh_key
 	subnet_id = aws_subnet.main_subnet.id
   vpc_security_group_ids = [
