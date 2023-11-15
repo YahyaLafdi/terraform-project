@@ -1,5 +1,6 @@
 - name: Jenkins Configuration
-  host: all
+  hosts: all
+  gather_facts: true
   remote_user: ubuntu
   tasks:
     - name: Installing Java
