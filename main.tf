@@ -18,10 +18,10 @@ provider "aws" {
     region = "eu-west-3"
 
 }
- data "aws_security_group" "selected"{
+/* data "aws_security_group" "selected"{
      id = "sg-081aa0ddd83e3c5b5"
 }
-
+*/
 
 
 
