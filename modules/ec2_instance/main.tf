@@ -11,7 +11,7 @@ data "aws_ami" "amazon_ubuntu" {
 }
 resource "aws_key_pair" "Tconfig_key" {
   key_name   = "t_config"
-  public_key = "~/.ssh/id_rsa.pub"
+  public_key = file("~/.ssh/id_rsa.pub")
 }
 
 resource "aws_instance" "jenkins_instance"{
