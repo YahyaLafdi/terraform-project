@@ -1,7 +1,7 @@
 
-output "Jenkins_pubic_ip"{
+output "Jenkins_public_ip"{
 	description = "print public ip "
-	value = module.ec2_instance.pubic_ip
+	value = module.ec2_instance.public_ip
 
 }
 
