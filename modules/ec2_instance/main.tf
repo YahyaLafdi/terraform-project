@@ -9,12 +9,16 @@ data "aws_ami" "amazon_ubuntu" {
   owners = ["099720109477"]
 
 }
+resource "aws_key_pair" "Tconfig_key" {
+  key_name   = "t_config"
+  public_key = "~/.ssh/id_rsa.pub"
+}
 
 resource "aws_instance" "jenkins_instance"{
 
 		ami = data.aws_ami.amazon_ubuntu.id
   instance_type = "t2.micro"
-  key_name = var.ssh_key
+  key_name = aws_key_pair.Tconfig_key.key_name
 	subnet_id = aws_subnet.main_subnet.id
   vpc_security_group_ids = [
     aws_security_group.Jenkins.id
