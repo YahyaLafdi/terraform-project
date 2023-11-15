@@ -1,10 +1,7 @@
----
 - name: Jenkins Configuration
   host: all
   remote_user: ubuntu
-
-
   tasks:
-  - name: Installing Java
-    apt: openjdk-11-jre
-    state: present
+    - name: Installing Java
+      apt: openjdk-11-jre
+      state: present
