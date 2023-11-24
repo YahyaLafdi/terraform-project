@@ -30,16 +30,17 @@
       apt: 
         name: jenkins
         state: present
-    - name: Check if Jennkins service is running
+    - name: Check if Jenkins service is running
       systemd:
         name: jenkins
         state: started
         enabled: yes
       register: jenkins_service_status
 
-    - name: Display Jenkins service status
-      debug:
-        var: jenkins_service_status
+    - name: Getting Jenkins Service status
+      shell: ps aux | grep jenkins
+      register: app_status
+    - debug: msg={{app_status.stdout_lines}}
     
     - name: -----!!! Getting jenkins initial password !!!!!!!
       shell: cat /var/lib/jenkins/secrets/initialAdminPassword
