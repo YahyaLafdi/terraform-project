@@ -30,4 +30,14 @@
       apt: 
         name: jenkins
         state: present
+    - name: Check if Jennkins service is running
+      systemd:
+        name: jenkins
+        state: started
+        enabled: yes
+      register: jenkins_service_status
+
+    - name: Display Jenkins service status
+      debug:
+        var: jenkins_service_status
          
