@@ -6,16 +6,15 @@
   tasks:
     - name: Key and repo
       block:
-      - name: Adding Jenkins GPG key
-        get_url:
-          url: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
-          dest: /usr/share/keyrings/jenkins-keyring.asc
-          mode: '0644'
-          force: true
-      - name: Adding Jenkins to source list
-        apt_repository:
-          repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+      - name: Add Jenkins repo using key from URL.
+        deb822_repository:
+          name: jenkins
+          types: [deb]
+          uris: "https://pkg.jenkins.io/debian-stable"
+          components: [binary]
+          signed_by: https://pkg.jenkins.io/debian-stable/jenkins.io.key
           state: present
+          enabled: true
     - name: Installing Java
       apt: 
         name: openjdk-11-jre
