@@ -15,11 +15,15 @@
           signed_by: https://pkg.jenkins.io/debian-stable/jenkins.io.key
           state: present
           enabled: true
+    - name: Update apt packages
+      apt:
+      update_cache: yes
+      cache_valid_time: 86400 
     - name: Installing Java
       apt: 
         name: openjdk-11-jre
         state: present
-        update_cache: yes
+        #update_cache: yes
     - name: Installing Java
       apt: 
         name: jenkins
