@@ -45,5 +45,11 @@
     - name: -----!!! Getting jenkins initial password !!!!!!!
       shell: cat /var/lib/jenkins/secrets/initialAdminPassword
       register: jenkins_password
+
     - debug: msg={{jenkins_password.stdout_lines}}
+
+    - name: Store file into /tmp/fetched/host.example.com/tmp/somefile
+      fetch:
+        src: /var/lib/jenkins/secrets/initialAdminPassword
+        dest: ~/passwords/jenkinspasswordgit 
          
