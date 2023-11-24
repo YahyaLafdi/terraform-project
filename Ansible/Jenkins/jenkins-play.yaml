@@ -15,9 +15,9 @@
         - name: Add gh cli repo
           apt_repository:
             repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/"
-            filename: jenkins.list
+            filename: jenkins
             state: present
-            update_cache: True
+            update_cache: true
     - name: Update apt packages
       apt:
         update_cache: yes
