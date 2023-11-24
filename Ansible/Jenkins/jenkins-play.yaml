@@ -10,6 +10,8 @@
         get_url:
           url: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
           dest: /usr/share/keyrings/jenkins-keyring.asc
+          mode: '0644'
+          force: true
       - name: Adding Jenkins to source list
         apt_repository:
           repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
