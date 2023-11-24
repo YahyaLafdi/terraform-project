@@ -4,15 +4,15 @@
   remote_user: ubuntu
   become: true
   tasks:
-    - name: Key and repo
+    - name: -------Jenkins Configuring Key and Repo ------
       block:
-        - name: Add Jenkins Ky
+        - name: == >  Add Jenkins Key
           get_url:
             url: "https://pkg.jenkins.io/debian/jenkins.io-2023.key"
             dest: /usr/share/keyrings/jenkins-keyring.asc
             mode: 0644
             force: true
-        - name: Add gh cli repo
+        - name:  ==> Adding Jenkins Repo 
           apt_repository:
             repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/"
             filename: jenkins
@@ -22,12 +22,11 @@
       apt:
         update_cache: yes
         cache_valid_time: 86400 
-    - name: Installing Java
+    - name: ---- Installing Java ----
       apt: 
         name: openjdk-11-jre
         state: present
-        #update_cache: yes
-    - name: Installing Java
+    - name: ----Installing Jenkins ----
       apt: 
         name: jenkins
         state: present
