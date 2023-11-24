@@ -27,6 +27,21 @@ tags = {
     Name = "${var.prefix}-Jenkins"
  }
     provisioner "local-exec" {
-      command = "echo url='https://www.duckdns.org/update?domains=server-jenkins&token=${var.duck_dns}&ip=${aws_instance.jenkins_instance.public_ip}' | curl -K -"
+      command = "echo url='https://www.duckdns.org/update?domains=${var.duck_dns_domain}&token=${var.duck_dns}&ip=${aws_instance.jenkins_instance.public_ip}' | curl -K -"
     }
+}
+
+resource "null_resource" "jenkins_instance" {
+  triggers = {
+    trigger = aws_instance.jenkins_instance.public_ip
+  }
+
+  provisioner "local-exec" {
+    command = "sleep 10"
+  }
+
+  provisioner "local-exec" {
+    working_dir = "../Ansible"
+    command = "ansible-playbook -i ${aws_instance.jenkins_instance.public_ip}, Jenkins/jenkins-playbook.yaml"
+  }
 }

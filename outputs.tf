@@ -11,3 +11,8 @@ output "private_ip" {
 
 }
 
+output "jenkins_url" {
+        description = "print jenkins url  "
+        value = module.ec2_instance.Jenkins_url
+
+}

@@ -40,4 +40,9 @@
     - name: Display Jenkins service status
       debug:
         var: jenkins_service_status
+    
+    - name: -----!!! Getting jenkins initial password !!!!!!!
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: jenkins_password
+    - debug: msg={{jenkins_password.stdout_lines}}
          

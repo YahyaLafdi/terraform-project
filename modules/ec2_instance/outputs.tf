@@ -10,4 +10,8 @@ output "private_ip" {
         value = "Instane created with private ip ${aws_instance.jenkins_instance.private_ip}"
 
 }
+output "Jenkins_url" {
+        description = "print jenkins url "
+        value = "Instane created with private ip ${var.duck_dns_domain}.duckdns.org"
 
+}
