@@ -41,7 +41,7 @@ resource "null_resource" "jenkins_instance" {
   }
 
   provisioner "local-exec" {
-    working_dir = "../Ansible"
+    working_dir = "./Ansible"
     command = "ansible-playbook -i ${aws_instance.jenkins_instance.public_ip}, Jenkins/jenkins-playbook.yaml"
   }
 }
