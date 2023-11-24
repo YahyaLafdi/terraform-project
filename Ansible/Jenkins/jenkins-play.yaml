@@ -6,15 +6,18 @@
   tasks:
     - name: Key and repo
       block:
-      - name: Add Jenkins repo using key from URL.
-        deb822_repository:
-          name: jenkins
-          types: [deb]
-          uris: "https://pkg.jenkins.io/debian-stable"
-          components: [binary]
-          signed_by: https://pkg.jenkins.io/debian-stable/jenkins.io.key
-          state: present
-          enabled: true
+        - name: Add Jenkins Ky
+          get_url:
+            url: "https://pkg.jenkins.io/debian/jenkins.io-2023.key"
+            dest: /usr/share/keyrings/jenkins-keyring.asc
+            mode: 0644
+            force: true
+        - name: Add gh cli repo
+          apt_repository:
+            repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/"
+            filename: jenkins.list
+            state: present
+            update_cache: True
     - name: Update apt packages
       apt:
         update_cache: yes
