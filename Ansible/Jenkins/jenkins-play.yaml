@@ -4,7 +4,20 @@
   remote_user: ubuntu
   become: true
   tasks:
+    - name: Adding Jenkins GPG key
+      get_url:
+        url: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
+        dest: /usr/share/keyrings/jenkins-keyring.asc
+    - name: Adding Jenkins to source list
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+        state: present
     - name: Installing Java
       apt: 
         name: openjdk-11-jre
         state: present
+    - name: Installing Java
+      apt: 
+        name: jenkins
+        state: present
+         
