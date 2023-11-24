@@ -51,5 +51,6 @@
     - name: Store file into /tmp/fetched/host.example.com/tmp/somefile
       fetch:
         src: /var/lib/jenkins/secrets/initialAdminPassword
-        dest: ~/passwords/jenkinspasswordgit 
+        dest: ~/passwords/jenkinspassword
+        flat: true
          
