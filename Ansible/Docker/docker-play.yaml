@@ -1,11 +1,26 @@
-- name: Jenkins Configuration
+- name: Server Docker Configuration
   hosts: all
   gather_facts: true
   remote_user: ubuntu
   become: true
   tasks:
-    - name: Printing test
-      debug:
-        msg:
-        - "instance running "
-        - "testing debug block"
+    - name: Installing Docker Deps
+      apt:
+        name:
+        - apt-transport-https
+        - ca-certificates  
+        - curl
+        - software-properties-common
+    - name: Add an Apt signing key, uses whichever key is at the URL
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name:  ==> Adding Jenkins Repo 
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        filename: docker
+        state: present
+        update_cache: true
+    - name: Installing Docker
+      apt:
+        name: docker-ce
