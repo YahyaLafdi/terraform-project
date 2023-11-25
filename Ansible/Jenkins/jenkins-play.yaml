@@ -22,9 +22,11 @@
       apt:
         update_cache: yes
         cache_valid_time: 86400 
-    - name: ---- Installing Java ----
+    - name: ---- Installing Java && deps----
       apt: 
-        name: openjdk-11-jre
+        name: 
+        - openjdk-11-jre
+        - software-properties-common
         state: present
     - name: ----Installing Jenkins ----
       apt: 
@@ -53,4 +55,29 @@
         src: /var/lib/jenkins/secrets/initialAdminPassword
         dest: ~/passwords/jenkinspassword
         flat: true
+    - name: adding Ansible PPA
+      apt_repository:
+        repo: 'ppa:ansible/ansible'
+      update_cache: true
+    - name: Installing Ansible
+      apt:
+        name: ansible
+    - name: -------Terrafom Configuring Key and Repo ------
+      block:
+        - name: == >  Add Jenkins Key
+          get_url:
+            url: "https://apt.releases.hashicorp.com/gpg"
+            dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+            mode: 0644
+            force: true
+        - name:  ==> Adding Jenkins Repo 
+          apt_repository:
+            repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main/"
+            filename: hashicorp
+            state: present
+            update_cache: true
+    - name: Installing Terraform
+      apt:
+        name: Terraform
+
          
