@@ -31,7 +31,24 @@ tags = {
     }
 }
 
-resource "null_resource" "jenkins_instance" {
+resource "aws_instance" "docker_instance"{
+
+		ami = data.aws_ami.amazon_ubuntu.id
+  instance_type = "t2.micro"
+  key_name = aws_key_pair.Tconfig_key.key_name
+	subnet_id = aws_subnet.main_subnet.id
+  vpc_security_group_ids = [
+    aws_security_group.Docker.id
+    ]
+tags = {
+    Name = "${var.prefix}-Docker"
+ }
+    provisioner "local-exec" {
+      command = "echo url='https://www.duckdns.org/update?domains=${var.duck_dns_domain}&token=${var.duck_dns}&ip=${aws_instance.jenkins_instance.public_ip}:8080' | curl -K -"
+    }
+}
+
+resource "null_resource" "docker_instance" {
   triggers = {
     trigger = aws_instance.jenkins_instance.public_ip
   }
