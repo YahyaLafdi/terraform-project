@@ -55,10 +55,11 @@
         src: /var/lib/jenkins/secrets/initialAdminPassword
         dest: ~/passwords/jenkinspassword
         flat: true
-    - name: adding Ansible PPA
+    
+    - name: adding ppa
       apt_repository:
         repo: 'ppa:ansible/ansible'
-      update_cache: true
+        update_cache: true
     - name: Installing Ansible
       apt:
         name: ansible
