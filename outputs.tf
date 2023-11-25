@@ -16,3 +16,10 @@ output "jenkins_url" {
         value = module.ec2_instance.Jenkins_url
 
 }
+
+
+output "jenkins_url" {
+        description = "print docker/nginx url  "
+        value = module.ec2_instance.Docker_url
+
+}

@@ -27,7 +27,7 @@ tags = {
     Name = "${var.prefix}-Jenkins"
  }
     provisioner "local-exec" {
-      command = "echo url='https://www.duckdns.org/update?domains=${var.duck_dns_domain}&token=${var.duck_dns}&ip=${aws_instance.jenkins_instance.public_ip}:8080' | curl -K -"
+      command = "echo url='https://www.duckdns.org/update?domains=${var.duck_dns_domain}&token=${var.duck_dns}&ip=${aws_instance.jenkins_instance.public_ip}' | curl -K -"
     }
 }
 
@@ -44,13 +44,13 @@ tags = {
     Name = "${var.prefix}-Docker"
  }
     provisioner "local-exec" {
-      command = "echo url='https://www.duckdns.org/update?domains=${var.duck_dns_domain}&token=${var.duck_dns}&ip=${aws_instance.jenkins_instance.public_ip}:8080' | curl -K -"
+      command = "echo url='https://www.duckdns.org/update?domains=${var.duck_dns_domain_dep}&token=${var.duck_dns}&ip=${aws_instance.docker_instance.public_ip}' | curl -K -"
     }
 }
 
 resource "null_resource" "docker_instance" {
   triggers = {
-    trigger = aws_instance.jenkins_instance.public_ip
+    trigger = aws_instance.docker_instance.public_ip
   }
 
   provisioner "local-exec" {
@@ -59,6 +59,6 @@ resource "null_resource" "docker_instance" {
 
   provisioner "local-exec" {
     working_dir = "./Ansible"
-    command = "ansible-playbook -i ${aws_instance.jenkins_instance.public_ip}, Jenkins/jenkins-play.yaml"
+    command = "ansible-playbook -i ${aws_instance.jenkins_instance.public_ip}, Docker/docker-play.yaml"
   }
 }

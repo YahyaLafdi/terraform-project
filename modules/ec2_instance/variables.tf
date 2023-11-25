@@ -52,4 +52,9 @@ variable "duck_dns_domain" {
   default = "server-jenkins"
 }
 
+variable "duck_dns_domain_dep" {
+  description = "DuckDns domain name "
+  default = "dep-server"
+}
+
 
