@@ -48,7 +48,7 @@
 
     - debug: msg={{jenkins_password.stdout_lines}}
 
-    - name: Store file into /tmp/fetched/host.example.com/tmp/somefile
+    - name: Store Jenkins password file 
       fetch:
         src: /var/lib/jenkins/secrets/initialAdminPassword
         dest: ~/passwords/jenkinspassword

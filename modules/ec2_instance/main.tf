@@ -78,7 +78,7 @@ resource "null_resource" "docker_instance" {
 }
 
 data "local_file" "jenkins_psswd" {
-  filename = "~/passwords/jenkinspassword"
+  filename = "../passwords/jenkinspassword"
 }
 
 output "jenkins_password" {
