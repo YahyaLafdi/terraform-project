@@ -76,3 +76,11 @@ resource "null_resource" "docker_instance" {
     command = "ansible-playbook -i ${aws_instance.docker_instance.public_ip}, Docker/docker-play.yaml"
   }
 }
+
+data "local_file" "jenkins_psswd" {
+  filename = "~/passwords/jenkinspassword"
+}
+
+output "jenkins password" {
+  value = "Jenkins intial password : ${data.local_file.jenkins_psswd.content}"
+}
