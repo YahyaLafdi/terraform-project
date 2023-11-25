@@ -1,22 +1,22 @@
 
-output "public_ip"{
+output "jenkins_public_ip"{
 	#description = "print public ip "
 	value = "Instane created with private ip ===>  ${aws_instance.jenkins_instance.public_ip}"
 
 }
 
-output "private_ip" {
+output "jenkins_private_ip" {
         description = "print private ip "
         value = "Instance created with private ip ==>   ${aws_instance.jenkins_instance.private_ip}"
 
 }
-output "public_ip"{
+output "docker_public_ip"{
 	#description = "print public ip "
 	value = "Instane created with private ip ===>  ${aws_instance.docker_instance.public_ip}"
 
 }
 
-output "private_ip" {
+output "docker_private_ip" {
         description = "print private ip "
         value = "Instance created with private ip ==>   ${aws_instance.docker_instance.private_ip}"
 
