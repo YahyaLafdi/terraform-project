@@ -1,49 +1,73 @@
 
-# Infrastructure as Code Project
-# V1
-### Terraform 
-#### Installation Process 
-###### Use a an EC2 instance to access a Linux Environment  for installing #Terraform.
+# Automation of Infrastructure Provisioning (IaC) and Configuration for your future CI/CD
+## V1
+## Project Description
+
+This project demonstrates the setup of a basic infrastructure using Terraform creating two EC2 servers and configuring them using Ansible for different purposes.
+
+### Overview
+
+1. **Instance 1: Jenkins, Ansible, and Terraform**
+   - **Jenkins**: Automation server for continuous integration and continuous delivery (CI/CD).
+   - **Ansible**: Configuration management tool for automating provisioning and application deployment.
+   - **Terraform**: Infrastructure as Code tool for defining and provisioning infrastructure.
+
+2. **Instance 2: Docker with Nginx Container**
+   - **Docker**: Containerization platform for packaging and running applications.
+   - **Nginx**: Web server running inside a Docker container.
+
+## To start the application
+### Prerequisites
+- Terraform
+- Ansible
+- Duckdns account for the Jenkins server and deployment Domains
+- Generate keypair using ```ssh-keygen -t rsa -b 4096 ```
+- Ensure AWS CLI is configured with IAM access (see "Configure AWS CLI with IAM Access" section).
+
+
+### Configure AWS CLI with IAM Access
+
+Before applying the Terraform configuration, ensure that your AWS CLI is configured with the necessary IAM access. If you haven't done this yet, follow these steps:
+
+1. **Install AWS CLI:** Follow the instructions at [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
+
+2. **Configure AWS CLI with your IAM credentials:**
+
+   Open your terminal and run the following command:
+
+   ```bash
+   aws configure
+
+### Steps
+
+**Step 0**: Clone the repository 
  
- - i followed the guide on the official Documentation for installing #Terraform on my Private server .
- - in my Case I've Used Ubuntu Distro. 
- - which has simplified installation process using #apt package manager .
+    git clone https://github.com/YahyaLafdi/terraform-project.git
 
-### First Attempt 
+**Step 1**: Navigate to the project directory
+ 
+    cd terraform-project
 
-Provisioning a simple EC2 instance.       *Success*
 
-### Second Attempt 
+**Step 2**: Create DuckDns account and domains and      update `` modules/ec2_modules/variables``   with token and domain names
 
-- assign an existing Key .      *Success*
+**Step 3**: Provision and configure your servers
 
-### Third Attempt 
+    terraform apply -auto-approve
+    
 
-- assign an existing Security  group to the newly created EC2 instance.  *Failure* !
- `LOG :`
-			  ```creating EC2 Instance: InvalidParameterValue: Value () for parameter groupId is invalid. The value cannot be empty  ```
+**Step 4**: access jenkins and configure your pipeline
 
- > **Resolution** : 
-	 - Using data block which is used to retireve existing security group ID and VPC ID 
-	 - also don't forget to specify subnet_id to reseolve *empty* GroupId 
+**Step 5**: run the jenkins pipeline
 
-###  *Resulting Success*
-
-## Using Mutli providers on the main Configue File
-# V2
-#### Modules
- ### EC2 Module
-- i have used modules in the V2.
-- i have used variables also to decouple my Configuration file .
-- also i created separated output files.
-#### State File
+# **Note**
+## *State File*
  ### State file storing
   - i have moved the statefile to an object storing in our case s3
-  - also i have added ressource for creating the s3
-  - and added the backend  ` .tf ` file to enabale remote storing and use of the ` .tfstate` file remotly and not locally
+  - I have used backend  ` .tf ` file to enable remote storing and use of the ` .tfstate` file remotly and not locally
   - also i created a DynamoDB resource to use for locking the state file to prevent concurrent modification of the infrastructre.
-
- ## *State file*
+   - create you s3 Bucket and replace the name and Region in the `` backend.tf`` file
+ ## *State file Best Practice *
 >    you should avoid storing the state file in the VCS as it may discolse information regarding the Inrastructure (access keys , private keys , passwords ....)
 >    instead use Remote object storage with proper permissions 
 
