@@ -11,11 +11,11 @@
         - ca-certificates  
         - curl
         - software-properties-common
-    - name: Add an Apt signing key, uses whichever key is at the URL
+    - name: Add Apt signing key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
-    - name:  ==> Adding Jenkins Repo 
+    - name:  ==> Adding Docker ce  Repo 
       apt_repository:
         repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
         filename: docker
@@ -24,3 +24,24 @@
     - name: Installing Docker
       apt:
         name: docker-ce
+    - name: add ec2-user to docker group and reset connection
+      block:
+        - name: start docker daemon
+          systemd:
+            name: docker
+            state: started
+            enabled: true
+        - name: add ubuntu user to docker group
+          user:
+            name: ubuntu
+            groups: docker
+            append: yes
+        - name: restart Docker service
+          systemd:
+            name: docker 
+            state: restarted
+        - name: Set permissions on docker.socket
+          file:
+            path: /var/run/docker.sock
+            mode: '0666'
+  
