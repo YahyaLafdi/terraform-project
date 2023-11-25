@@ -64,13 +64,13 @@
         name: ansible
     - name: -------Terrafom Configuring Key and Repo ------
       block:
-        - name: == >  Add Jenkins Key
+        - name: == >  Add Terrafom Key
           get_url:
             url: "https://apt.releases.hashicorp.com/gpg"
             dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
             mode: 0644
             force: true
-        - name:  ==> Adding Jenkins Repo 
+        - name:  ==> Adding terrafom Repo 
           apt_repository:
             repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main/"
             filename: hashicorp
@@ -78,6 +78,6 @@
             update_cache: true
     - name: Installing Terraform
       apt:
-        name: Terraform
+        name: terraform
 
          
