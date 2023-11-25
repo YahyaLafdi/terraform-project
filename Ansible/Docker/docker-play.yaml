@@ -15,7 +15,7 @@
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
-    - name:  ==> Adding Docker ce  Repo 
+    - name:  ==> Adding Docker-ce  Repo 
       apt_repository:
         repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
         filename: docker
@@ -24,7 +24,7 @@
     - name: Installing Docker
       apt:
         name: docker-ce
-    - name: add ec2-user to docker group and reset connection
+    - name: add ubuntu user to docker group and restarting
       block:
         - name: start docker daemon
           systemd:
@@ -44,4 +44,18 @@
           file:
             path: /var/run/docker.sock
             mode: '0666'
+    - name: Starting nginx Conatiner and Binding ports
+      block:
+        - name: Pull Latest nginx image
+          docker_image:
+            name: nginx:latest
+            source: pull
+        - name: Starting nginx container
+          docker_container:
+            name: webapp
+            image: nginx:latest
+            ports:
+              - "80:80"
+            state: started
+                
   

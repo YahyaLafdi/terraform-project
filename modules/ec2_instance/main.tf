@@ -73,6 +73,6 @@ resource "null_resource" "docker_instance" {
 
   provisioner "local-exec" {
     working_dir = "./Ansible"
-    command = "ansible-playbook -i ${aws_instance.jenkins_instance.public_ip}, Docker/docker-play.yaml"
+    command = "ansible-playbook -i ${aws_instance.docker_instance.public_ip}, Docker/docker-play.yaml"
   }
 }
