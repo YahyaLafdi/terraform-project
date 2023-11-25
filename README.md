@@ -79,7 +79,7 @@ you can find the init password at `` ~/password/jenkinspassword``   Or in the ou
   - I have used backend  ` .tf ` file to enable remote storing and use of the ` .tfstate` file remotly and not locally
   - also i created a DynamoDB resource to use for locking the state file to prevent concurrent modification of the infrastructre.
    - create you s3 Bucket and replace the name and Region in the `` backend.tf`` file
- ## *State file Best Practice *
+ ## * State file Best Practice *
 >    you should avoid storing the state file in the VCS as it may discolse information regarding the Inrastructure (access keys , private keys , passwords ....)
 >    instead use Remote object storage with proper permissions 
 
