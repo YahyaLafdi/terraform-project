@@ -53,12 +53,24 @@ Before applying the Terraform configuration, ensure that your AWS CLI is configu
 
 **Step 3**: Provision and configure your servers
 
-    terraform apply -auto-approve
+    terraform apply --auto-approve
     
 
-**Step 4**: access jenkins and configure your pipeline
+**Step 4**: access jenkins and configure your pipeline *(everything is in the output)*
 
-**Step 5**: run the jenkins pipeline
+    http://public-ip:8080/          OR 
+    http://{domain-name}.duckdns.org:8080/
+
+you can find the init password at `` ~/password/jenkinspassword``   Or in the output :
+
+## Terraform output: 
+![My Image](output.png)
+
+**Step 5**:   run the jenkins pipeline
+### Cleanup
+
+
+    terraform destroy --auto-approve
 
 # **Note**
 ## *State File*
