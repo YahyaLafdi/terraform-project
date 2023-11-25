@@ -47,4 +47,14 @@ variable "duck_dns" {
 }
 
 
+variable "duck_dns_domain" {
+  description = "DuckDns domain name "
+  default = "server-jenkins"
+}
+
+variable "duck_dns_domain_dep" {
+  description = "DuckDns domain name "
+  default = "dep-server"
+}
+
 

@@ -1,0 +1,82 @@
+- name: Jenkins Configuration
+  hosts: all
+  gather_facts: true
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: -------Jenkins Configuring Key and Repo ------
+      block:
+        - name: == >  Add Jenkins Key
+          get_url:
+            url: "https://pkg.jenkins.io/debian/jenkins.io-2023.key"
+            dest: /usr/share/keyrings/jenkins-keyring.asc
+            mode: 0644
+            force: true
+        - name:  ==> Adding Jenkins Repo 
+          apt_repository:
+            repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/"
+            filename: jenkins
+            state: present
+            update_cache: true
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+        cache_valid_time: 86400 
+    - name: ---- Installing Java && deps----
+      apt: 
+        name: 
+        - openjdk-11-jre
+        - software-properties-common
+        state: present
+    - name: ----Installing Jenkins ----
+      apt: 
+        name: jenkins
+        state: present
+    - name: Check if Jenkins service is running
+      systemd:
+        name: jenkins
+        state: started
+        enabled: yes
+      register: jenkins_service_status
+
+    - name: Getting Jenkins Service status
+      shell: ps aux | grep jenkins
+      register: app_status
+    - debug: msg={{app_status.stdout_lines}}
+    
+    - name: -----!!! Getting jenkins initial password !!!!!!!
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: jenkins_password
+
+    - debug: msg={{jenkins_password.stdout_lines}}
+
+    - name: Store Jenkins password file 
+      fetch:
+        src: /var/lib/jenkins/secrets/initialAdminPassword
+        dest: ~/passwords/jenkinspassword
+        flat: true
+    
+    - name: adding ppa
+      apt_repository:
+        repo: 'ppa:ansible/ansible'
+        update_cache: true
+    - name: Installing Ansible
+      apt:
+        name: ansible
+    - name: -------Terrafom Configuring Key and Repo ------
+      block:
+        - name: Add Apt signing key
+          apt_key:
+            url: https://apt.releases.hashicorp.com/gpg
+            state: present
+        - name:  ==> Adding terrafom Repo 
+          apt_repository:
+            repo: "deb [arch=amd64]  https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+            filename: hashicorp
+            state: present
+            update_cache: true
+        - name: Installing Terraform
+          apt:
+            name: terraform
+
+         

@@ -1,0 +1,61 @@
+- name: Server Docker Configuration
+  hosts: all
+  gather_facts: true
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: Installing Docker Deps
+      apt:
+        name:
+        - apt-transport-https
+        - ca-certificates  
+        - curl
+        - software-properties-common
+    - name: Add Apt signing key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name:  ==> Adding Docker-ce  Repo 
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        filename: docker
+        state: present
+        update_cache: true
+    - name: Installing Docker
+      apt:
+        name: docker-ce
+    - name: add ubuntu user to docker group and restarting
+      block:
+        - name: start docker daemon
+          systemd:
+            name: docker
+            state: started
+            enabled: true
+        - name: add ubuntu user to docker group
+          user:
+            name: ubuntu
+            groups: docker
+            append: yes
+        - name: restart Docker service
+          systemd:
+            name: docker 
+            state: restarted
+        - name: Set permissions on docker.socket
+          file:
+            path: /var/run/docker.sock
+            mode: '0666'
+    - name: Starting nginx Conatiner and Binding ports
+      block:
+        - name: Pull Latest nginx image
+          docker_image:
+            name: nginx:latest
+            source: pull
+        - name: Starting nginx container
+          docker_container:
+            name: webapp
+            image: nginx:latest
+            ports:
+              - "80:80"
+            state: started
+                
+  
