@@ -1,6 +1,11 @@
----
-- name: Printing test
-  debug:
-    msg:
-    - "instance running "
-    - "testing debug block"
+- name: Jenkins Configuration
+  hosts: all
+  gather_facts: true
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: Printing test
+      debug:
+        msg:
+        - "instance running "
+        - "testing debug block"
