@@ -65,15 +65,13 @@
         name: ansible
     - name: -------Terrafom Configuring Key and Repo ------
       block:
-        - name: == >  Add Terrafom Key
-          get_url:
-            url: "https://apt.releases.hashicorp.com/gpg"
-            dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
-            mode: 0644
-            force: true
+        - name: Add Apt signing key
+          apt_key:
+            url: https://apt.releases.hashicorp.com/gpg
+            state: present
         - name:  ==> Adding terrafom Repo 
           apt_repository:
-            repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main/"
+            repo: "deb  https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main/"
             filename: hashicorp
             state: present
             update_cache: true
