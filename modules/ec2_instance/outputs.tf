@@ -33,3 +33,10 @@ output "Docker_url" {
         value = "Nginx runnig container ===>   http://${var.duck_dns_domain_dep}.duckdns.org:80/"
 
 }
+data "local_file" "jenkins_psswd" {
+  filename = "../passwords/jenkinspassword"
+}
+
+output "jenkins_password" {
+  value = "Jenkins intial password : ${data.local_file.jenkins_psswd.content}"
+}

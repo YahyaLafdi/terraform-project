@@ -29,10 +29,17 @@ output "jenkins_url" {
         value = module.ec2_instance.Jenkins_url
 
 }
-
-
 output "docker_url" {
-        description = "print docker/nginx url  "
+        description = "print Jenkins password  "
         value = module.ec2_instance.Docker_url
 
 }
+
+
+output "jenkins_pass" {
+        description = "Printing Jenkins initial password "
+        value = module.ec2_instance.jenkins_password
+
+}
+
+
