@@ -6,7 +6,7 @@
 This project demonstrates the setup of a basic infrastructure using Terraform creating two EC2 servers and configuring them using Ansible for different purposes.
 
 ### Overview
-
+![My Image](Diagram.png)
 1. **Instance 1: Jenkins, Ansible, and Terraform**
    - **Jenkins**: Automation server for continuous integration and continuous delivery (CI/CD).
    - **Ansible**: Configuration management tool for automating provisioning and application deployment.
